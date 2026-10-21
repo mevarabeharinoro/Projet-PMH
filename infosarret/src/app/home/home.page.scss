@@ -1,0 +1,139 @@
+#container {
+  text-align: center;
+
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 20%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container2 {
+  text-align: center;
+
+  position:relative;
+  left: 0;
+  right: 0;
+  top: 40%;
+  transform: translateY(-50%);
+}
+
+#container2 strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container2 p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#bouton,
+#bouton2 {
+  text-align: center;
+  margin-top: 16px;
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 16%;
+}
+
+#bouton2 {
+  margin-top: 12px;
+  margin-bottom: 32px; 
+}
+
+#bouton ion-button,
+#bouton2 ion-button {
+  width: 50%;
+  --border-radius: 8px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  transition: transform 0.15s ease, box-shadow 0.3s ease;
+}
+
+#bouton ion-button {
+  --background: #333;
+  --background-hover: #4a4a4a;
+  --color: #ccc;
+}
+
+#bouton2 ion-button {
+  --background: #0057ff;
+  --background-hover: #003fbb;
+  --color: #fff;
+}
+
+#bouton ion-button:active,
+#bouton2 ion-button:active {
+  transform: scale(0.98);
+}
+
+#bouton ion-button:hover,
+#bouton2 ion-button:hover {
+  box-shadow: 0 6px 12px rgba(4, 38, 46, 0.25);
+}
+
+input{
+  width: 50%;
+  padding: 12px 16px;
+  margin: 8px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select{
+  width: 50%;
+  padding: 12px 16px;
+  margin: 8px 0;
+  font-size: 16px;
+  
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button{
+  width: 50%;
+  padding: 12px 16px;
+  margin: 8px 0;
+  font-size: 16px;
+  
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #333;
+  color: #ccc;
+  cursor: pointer;
+  
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

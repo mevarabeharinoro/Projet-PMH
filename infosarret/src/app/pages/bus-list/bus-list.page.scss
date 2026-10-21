@@ -1,0 +1,37 @@
+ion-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.ligne-etat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+
+  .etat-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+  }
+}
+
+.pastille {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+
+  &.etat-marche    { background: #04a547; }  /* vert */
+  &.etat-arret     { background: #f1c40f; }  /* jaune */
+  &.etat-panne     { background: #e74c3c; }  /* rouge */
+  &.etat-transfert { background: #3498db; }  /* bleu */
+  &.etat-school    { background: #9b59b6; }  /* violet */
+  &.etat-plein     { background: #e67e22; }  /* orange */
+}
+
+ion-select {
+  width: 100%;
+  padding: 8px 0;
+}

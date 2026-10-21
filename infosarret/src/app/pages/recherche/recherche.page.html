@@ -1,0 +1,81 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Bus Info</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollY]="false">
+  <div class="page">
+    <div #carte class="carte"></div>
+
+    <div class="panneau">
+      <ion-item lines="none">
+        <ion-label position="stacked">Votre zone de départ</ion-label>
+        <ion-select [value]="zoneOrigineId" (ionChange)="definirZoneOrigine($any($event).detail.value)"
+                    placeholder="Choisir une zone" interface="action-sheet" cancelText="Annuler">
+          <ion-select-option *ngFor="let z of zones" [value]="z.id">{{ z.nom }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <p class="info" *ngIf="messageZone">{{ messageZone }}</p>
+      <p class="info" *ngIf="zoneOrigineId">{{ nbBusZone }} bus en marche dans votre zone</p>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Zone de destination</ion-label>
+        <ion-select [value]="zoneDestId" (ionChange)="choisirZoneDest($any($event).detail.value)"
+                    placeholder="Choisir une zone" interface="action-sheet" cancelText="Annuler">
+          <ion-select-option *ngFor="let z of zones" [value]="z.id">{{ z.nom }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Arrêt de destination</ion-label>
+        <ion-select [value]="arretDestId" (ionChange)="selectionnerArretDest($any($event).detail.value)"
+                    [disabled]="!zoneDestId" placeholder="Choisir un arrêt" interface="action-sheet" cancelText="Annuler">
+          <ion-select-option *ngFor="let a of arretsDest" [value]="a.id">{{ a.nom }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="actions">
+        <ion-button fill="outline" size="small" (click)="localiser()">
+          <ion-icon slot="start" name="locate-outline"></ion-icon>
+          Ma position
+        </ion-button>
+        <ion-button size="small" (click)="chercher()">
+          <ion-icon slot="start" name="search-outline"></ion-icon>
+          Chercher
+        </ion-button>
+      </div>
+
+      <p class="vide" *ngIf="recherchEffectuee && resultats.length === 0">{{ messageResultat }}</p>
+
+      <div class="resultat" *ngFor="let res of resultats; trackBy: trackByBus">
+        <div class="entete">
+          <span class="badge-ligne">{{ res.numLigne }}</span>
+          <span class="bus-num" *ngIf="res.numBus">Bus {{ res.numBus }}</span>
+        </div>
+
+        <p class="montee">
+          Montez à <strong>{{ res.arretMontee.nom }}</strong>
+          <span *ngIf="res.distanceMarcheM !== null"> · {{ res.distanceMarcheM }} m à pied</span>
+        </p>
+
+        <div class="eta" *ngIf="res.etaMinutes > 0">Dans <strong>{{ res.etaMinutes }}</strong> min</div>
+        <div class="eta arrive" *ngIf="res.etaMinutes === 0">Le bus est à l'arrêt</div>
+
+        <div class="retours" *ngIf="res.etaMinutes === 0 && !retoursEnvoyes.has(res.busId)">
+          <p><strong>Était-il à l'heure ?</strong></p>
+          <div class="grille">
+            <ion-button size="small" color="success" (click)="envoyerRetour(res.busId, res.arretMontee.id, 'a_l_heure')">À l'heure</ion-button>
+            <ion-button size="small" color="warning" (click)="envoyerRetour(res.busId, res.arretMontee.id, 'en_retard')">En retard</ion-button>
+            <ion-button size="small" color="tertiary" (click)="envoyerRetour(res.busId, res.arretMontee.id, 'mauvais_etat')">Mauvais état</ion-button>
+          </div>
+        </div>
+
+        <ion-button fill="clear" size="small" color="danger"
+                    (click)="envoyerRetour(res.busId, res.arretMontee.id, 'pas_venu')">
+          Il n'est pas passé ?
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

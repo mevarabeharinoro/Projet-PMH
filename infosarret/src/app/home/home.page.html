@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      PMH Etape 1
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">INFOS</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <strong>Infos Arrêt</strong>
+    <p>Nom Arrêt</p>
+    <input type="text" id="nomarret" name="nomarret" [(ngModel)]="nomArret">
+  </div>
+  <div id="container2">
+    <strong>Infos Bus</strong>
+    <p>N° Bus</p>
+    <input type="text" id="numbus" name="numbus" [(ngModel)]="numBus">
+    <p>N° Ligne</p>
+    <input type="text" id="numligne" name="numligne" [(ngModel)]="numLigne">
+    <p>Direction</p>
+    <input type="text" id="direction" name="direction" [(ngModel)]="direction">
+    <p>Etat</p>
+    <select type="text" id="etat" name="etat" [(ngModel)]="etat">
+      <option value="default">NULL</option>
+      <option value="marche">En marche</option>
+      <option value="arret">En arrêt</option>
+      <option value="panne">En panne</option>
+      <option value="transfert">Transfert</option>
+      <option value="school">Ecole</option>
+      <option value="plein">Plein</option>
+    </select>
+  </div>
+  <div id="bouton">
+    <ion-button type="button" class="bouton" (click)="validerCollecte()">Valider Collecte</ion-button>
+  </div>
+  <div id="bouton2">
+    <ion-button type="button" class="bouton2" routerLink="/bus-list">
+      Gérer les bus
+    </ion-button>
+  </div>
+</ion-content>

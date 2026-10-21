@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>État des bus</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="chargerBus()">
+        <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-spinner *ngIf="loading" name="crescent" style="display:block; margin: 40px auto;"></ion-spinner>
+
+  <ion-text color="medium" *ngIf="!loading && busList.length === 0">
+    <p style="text-align:center;">Aucun bus trouvé.</p>
+  </ion-text>
+
+  <ion-card *ngFor="let bus of busList">
+    <ion-card-header>
+      <ion-card-title>
+        Ligne {{ bus.num_ligne }} — {{ bus.nom_ligne }}
+      </ion-card-title>
+      <ion-card-subtitle>
+        Bus #{{ bus.id }} • {{ bus.vitesse }} km/h
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="ligne-etat">
+        <span class="pastille" [ngClass]="couleurEtat(bus.etat)"></span>
+        <span class="etat-label">{{ bus.etat | uppercase }}</span>
+      </div>
+
+      <ion-item lines="none">
+        <ion-label position="stacked">Changer l'état</ion-label>
+        <ion-select
+          [value]="bus.etat"
+          (ionChange)="changerEtat(bus, $any($event).detail.value)"
+          interface="action-sheet"
+          cancelText="Annuler">
+          <ion-select-option *ngFor="let e of etats" [value]="e">
+            {{ e }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label position="stacked">Position du bus</ion-label>
+        <ion-select
+          [value]="bus.ordre_actuel"
+          (ionChange)="deplacerBus(bus, $any($event).detail.value)"
+          interface="action-sheet"
+          cancelText="Annuler">
+          <ion-select-option *ngFor="let t of etapes(bus)" [value]="t.ordre">
+            {{ t.ordre }}. {{ t.nom }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
